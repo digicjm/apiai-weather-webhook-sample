@@ -50,20 +50,10 @@ def forwardToAutomate(req):
            "to": "groupwise.cmadison@gmail.com",
            "payload": payload}
     print(data)
-    data = json.dumps(data)
-    print(data)
     
     baseurl = "https://llamalab.com/automate/cloud/message"
-    clen = len(data)
-    print("Preparing request...")
-    req = urllib.Request(baseurl, data, {'Content-Type': 'application/json', 'Content-Length': clen})
-    print("Sending request...")
-    f = urllib.urlopen(req)
-    print("Sent")
-    response = f.read()
-    print(response)
-    f.close()
-    
+    requests.post(baseurl, json=data)
+
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":

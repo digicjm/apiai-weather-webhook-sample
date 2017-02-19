@@ -9,9 +9,8 @@ import json
 import os
 import time
 
-from flask import Flask
-from flask import request
-from flask import make_response
+from sanic import Sanic
+from sanic.response import json
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -19,7 +18,7 @@ app = Flask(__name__)
 automateResponse = ""
 
 @app.route('/webhook', methods=['POST'])
-def webhook():
+async def webhook(request):
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
@@ -39,13 +38,12 @@ def webhook():
     res = json.dumps(res, indent=4)
     print("Response:")
     print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
+    r = res
     print("Responded")
-    return r
+    return json(r)
 
 @app.route('/automate', methods=['POST'])
-def automate():
+async def automate(request):
     req = request.get_json(silent=True, force=True)
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -138,4 +136,4 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(host='0.0.0.0', port=port)

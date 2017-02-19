@@ -19,7 +19,7 @@ automateResponse = ""
 
 @app.route('/webhook', methods=['POST'])
 async def webhook(request):
-    req = request.get_json(silent=True, force=True)
+    req = request.json
 
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -44,7 +44,7 @@ async def webhook(request):
 
 @app.route('/automate', methods=['POST'])
 async def automate(request):
-    req = request.get_json(silent=True, force=True)
+    req = request.json
     print("Request:")
     print(json.dumps(req, indent=4))
     automateResponse = req

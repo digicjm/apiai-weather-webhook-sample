@@ -32,6 +32,7 @@ def webhook():
         forwardToAutomate(req)
         print("Waiting for response")
         time.sleep(2)
+        print("Done waiting")
         res = automateResponse
     
     res = json.dumps(res, indent=4)

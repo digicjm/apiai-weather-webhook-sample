@@ -21,15 +21,38 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
+    
+    action = req.get("result").get("action")
 
-    res = processRequest(req)
+    if action = "yahooWeatherForecast":
+        res = processRequest(req)
+        res = json.dumps(res, indent=4)
+        # print(res)
+        r = make_response(res)
+        r.headers['Content-Type'] = 'application/json'
+        return r
+    else:
+        r = forwardToAutomate(req)
+    
 
-    res = json.dumps(res, indent=4)
-    # print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
 
+
+def forwardToAutomate(req):
+    result = req.get("result")
+    action = result.get("action")
+    parameters = result.get("parameters")
+    
+    payload = action + "(" + parameters + ")"
+    
+    data = {}
+    data['secret'] = '1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4='
+    data['to'] = 'groupwise.cmadison@gmail.com'
+    data['payload'] = payload
+    
+    baseurl = "https://llamalab.com/automate/cloud/message?"
+    fullurl = baseurl + urllib.parse.urlencode(data)
+    result = urllib.request.urlopen(fullurl).read()
+    
 
 def processRequest(req):
     if req.get("result").get("action") != "yahooWeatherForecast":

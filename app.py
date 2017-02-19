@@ -15,6 +15,7 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
+automateResponse = ""
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -27,21 +28,24 @@ def webhook():
 
     if action == "yahooWeatherForecast":
         res = processRequest(req)
-        res = json.dumps(res, indent=4)
-        # print(res)
-        r = make_response(res)
-        r.headers['Content-Type'] = 'application/json'
-        return r
     else:
         forwardToAutomate(req)
+        time.sleep(2)
+        res = automateResponse
     
+    res = json.dumps(res, indent=4)
+    # print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
 
 @app.route('/automate', methods=['POST'])
 def automate():
     req = request.get_json(silent=True, force=True)
     print("Request:")
     print(json.dumps(req, indent=4))
-
+    automateResponse = req
+    
 
 def forwardToAutomate(req):
     print("Forwarding to Automate...")

@@ -10,7 +10,7 @@ import os
 import time
 
 from sanic import Sanic
-from sanic.response import json
+from sanic.response import json as jsonResponse
 
 # Flask app should start in global layout
 app = Sanic()
@@ -39,7 +39,7 @@ async def webhook(request):
     print(res)
     r = res
     print("Responded")
-    return json(r)
+    return jsonResponse(r)
 
 @app.route('/automate', methods=['POST'])
 async def automate(request):
@@ -55,7 +55,7 @@ def forwardToAutomate(req):
     action = result.get("action")
     parameters = result.get("parameters")
     
-    payload = action + "=" + str(parameters)
+    payload = action + "=" + json.dumps(parameters)
     
     data = {"secret": "1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4=",
            "to": "groupwise.cmadison@gmail.com",

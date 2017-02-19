@@ -24,7 +24,7 @@ def webhook():
     
     action = req.get("result").get("action")
 
-    if action = "yahooWeatherForecast":
+    if action == "yahooWeatherForecast":
         res = processRequest(req)
         res = json.dumps(res, indent=4)
         # print(res)

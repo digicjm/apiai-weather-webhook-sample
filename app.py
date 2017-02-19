@@ -32,12 +32,13 @@ def webhook():
         r.headers['Content-Type'] = 'application/json'
         return r
     else:
-        r = forwardToAutomate(req)
+        forwardToAutomate(req)
     
 
 
 
 def forwardToAutomate(req):
+    print("Forwarding to Automate..."
     result = req.get("result")
     action = result.get("action")
     parameters = result.get("parameters")

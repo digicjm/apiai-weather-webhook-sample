@@ -13,7 +13,7 @@ from sanic import Sanic
 from sanic.response import json
 
 # Flask app should start in global layout
-app = Flask(__name__)
+app = Sanic()
 
 automateResponse = ""
 

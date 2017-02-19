@@ -22,7 +22,7 @@ async def webhook(request):
     req = request.json
 
     print("Request:")
-    print(json.dumps(req, indent=4))
+    print(req)
     
     action = req.get("result").get("action")
 

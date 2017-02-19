@@ -38,7 +38,7 @@ def webhook():
 
 
 def forwardToAutomate(req):
-    print("Forwarding to Automate..."
+    print("Forwarding to Automate...")
     result = req.get("result")
     action = result.get("action")
     parameters = result.get("parameters")

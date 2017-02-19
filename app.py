@@ -48,10 +48,16 @@ def forwardToAutomate(req):
     data['secret'] = '1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4='
     data['to'] = 'groupwise.cmadison@gmail.com'
     data['payload'] = payload
+    data = json.dumps(data)
+    print(json.dumps(data, indent=4))
     
-    baseurl = "https://llamalab.com/automate/cloud/message?"
-    fullurl = baseurl + urllib.parse.urlencode(data)
-    result = urllib.request.urlopen(fullurl).read()
+    baseurl = "https://llamalab.com/automate/cloud/message"
+    clen = len(data)
+    req = urllib2.Request(baseurl, data, {'Content-Type': 'application/json', 'Content-Length': clen})
+    f = urllib2.urlopen(req)
+    response = f.read()
+    print(response)
+    f.close()
     
 
 def processRequest(req):

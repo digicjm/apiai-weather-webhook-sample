@@ -36,6 +36,11 @@ def webhook():
         forwardToAutomate(req)
     
 
+@app.route('/automate', methods=['POST'])
+def automate():
+    req = request.get_json(silent=True, force=True)
+    print("Request:")
+    print(json.dumps(req, indent=4))
 
 
 def forwardToAutomate(req):

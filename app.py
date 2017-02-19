@@ -32,7 +32,7 @@ def webhook():
     else:
         forwardToAutomate(req)
         print("Waiting for response")
-        time.sleep(2)
+        time.sleep(4)
         print("Done waiting")
         res = automateResponse
     

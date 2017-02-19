@@ -46,7 +46,7 @@ async def automate(request):
     req = request.json
     print("Automate Request:")
     print(req)
-    automateResponse = req
+    automateResponse = json.dumps(req)
     
 
 def forwardToAutomate(req):

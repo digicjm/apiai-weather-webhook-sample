@@ -30,13 +30,16 @@ def webhook():
         res = processRequest(req)
     else:
         forwardToAutomate(req)
+        print("Waiting for response")
         time.sleep(2)
         res = automateResponse
     
     res = json.dumps(res, indent=4)
-    # print(res)
+    print("Response:")
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
+    print("Responded")
     return r
 
 @app.route('/automate', methods=['POST'])

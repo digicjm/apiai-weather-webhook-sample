@@ -54,7 +54,9 @@ def forwardToAutomate(req):
     
     baseurl = "https://llamalab.com/automate/cloud/message"
     clen = len(data)
+    print("Preparing request...")
     req = urllib2.Request(baseurl, data, {'Content-Type': 'application/json', 'Content-Length': clen})
+    print("Sending request...")
     f = urllib2.urlopen(req)
     print("Sent")
     response = f.read()

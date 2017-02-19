@@ -21,7 +21,7 @@ automateResponse = ""
 async def webhook(request):
     req = request.json
 
-    print("Request:")
+    print("Webhook Request:")
     print(req)
     
     action = req.get("result").get("action")
@@ -35,7 +35,6 @@ async def webhook(request):
         print("Done waiting")
         res = automateResponse
     
-    res = json.dumps(res, indent=4)
     print("Response:")
     print(res)
     r = res
@@ -45,8 +44,8 @@ async def webhook(request):
 @app.route('/automate', methods=['POST'])
 async def automate(request):
     req = request.json
-    print("Request:")
-    print(json.dumps(req, indent=4))
+    print("Automate Request:")
+    print(req)
     automateResponse = req
     
 
@@ -56,7 +55,7 @@ def forwardToAutomate(req):
     action = result.get("action")
     parameters = result.get("parameters")
     
-    payload = action + "=" + json.dumps(parameters)
+    payload = action + "=" + parameters
     
     data = {"secret": "1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4=",
            "to": "groupwise.cmadison@gmail.com",

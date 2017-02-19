@@ -45,10 +45,10 @@ def forwardToAutomate(req):
     
     payload = action + "(" + parameters + ")"
     
-    data = {}
-    data['secret'] = '1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4='
-    data['to'] = 'groupwise.cmadison@gmail.com'
-    data['payload'] = payload
+    data = {"secret": "1.mrxBipl3kqI0jptezLOa78IWjPvmoNi1wHeAeYYjyA4=",
+           "to": "groupwise.cmadison@gmail.com",
+           "payload": payload}
+    print(data)
     data = json.dumps(data)
     print(json.dumps(data, indent=4))
     
